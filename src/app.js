@@ -23,10 +23,8 @@ sequelize.authenticate().then(() => {
   console.error('Unable to connect to the database:', err);
 });
 
-// Sincronizar los modelos con la base de datos
 sequelize.sync({ force: false }).then(() => {
   console.log('Database & tables created!');
-  // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
