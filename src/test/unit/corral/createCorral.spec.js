@@ -1,16 +1,16 @@
 const request = require('supertest');
 const express = require('express');
 const bodyParser = require('body-parser');
-const animalRoutes = require('../../../routes/animalRoute');
+const corralRoutes = require('../../../routes/corralRoute');
 const configureMocks = require('./mocks');
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/animals', animalRoutes);
+app.use('/corrals', corralRoutes);
 
 jest.mock('../../../models', () => {
   return {
-    Animal: {
+    Corral: {
       findAll: jest.fn(),
       create: jest.fn()
     }
@@ -19,26 +19,26 @@ jest.mock('../../../models', () => {
 
 /**
  * @description se define una sola Suite de pruebas que será la encargada de cubrir los test
- * de la funcion CREATE de animales
+ * de la funcion CREATE de corrales
  * @note Se usa jest.mock() que es una función de jest que permite crear simulaciones
  * de modulos y/o formatos que sirvan para usarse en la prueba ya sea para comparar respuestas
  * o para enviar parametros a la función de prueba
  */
 
-describe('CREATE (post) /animals', () => {
-    it('Debería crear un nuevo animal correctamente', async () => {
-        configureMocks('mockCreateAnimal');
+describe('CREATE (post) /corrals', () => {
+    it('Debería crear un nuevo corral correctamente', async () => {
+        configureMocks('mockCreateCorral');
         const response = await request(app)
-          .post('/animals')
-          .send({ name: 'Loro', age: 2, dangerous: false });
+          .post('/corrals')
+          .send({});
         expect(response.status).toBe(201);
-        expect(response.body).toEqual(expect.objectContaining({ id: 32, name: 'Loro', age: 2, dangerous: false }));
+        expect(response.body).toEqual(expect.objectContaining({ id: 32, name: 'Corral 3', capacity: 2 }));
     });
 
     it('Debería devolver un error si los datos son incompletos', async () => {
-        configureMocks('mockCreateAnimal');
+        configureMocks('mockCreateCorral');
         const response = await request(app)
-          .post('/animals')
+          .post('/corrals')
           .send({ name: 'Loro' });
         expect(response.status).toBe(400);
         expect(response.body).toEqual(expect.objectContaining({
@@ -46,10 +46,10 @@ describe('CREATE (post) /animals', () => {
         }));
     });
 
-    it('No debería permitir crear un animal con un ID duplicado', async () => {
+    it('No debería permitir crear un corral con un ID duplicado', async () => {
         configureMocks('mockDuplicateIdError');
         const response = await request(app)
-          .post('/animals')
+          .post('/corrals')
           .send({ id: 1, name: 'Perro', age: 5, dangerous: false });
         expect(response.status).toBe(400);
         expect(response.body).toEqual({ error: 'Duplicate ID error' });
@@ -58,24 +58,24 @@ describe('CREATE (post) /animals', () => {
     it('Debería manejar errores correctamente', async () => {
         configureMocks('mockManagmentError');
         const response = await request(app)
-          .post('/animals')
+          .post('/corrals')
           .send({ name: 'Loro', age: 2, dangerous: false });
         expect(response.status).toBe(400);
-        expect(response.body).toEqual({ error: 'Error al crear animal' });
+        expect(response.body).toEqual({ error: 'Error al crear corral' });
     });
 
     it('Debería devolver un error si el campo dangerous no es un booleano', async () => {
         const response = await request(app)
-            .post('/animals')
+            .post('/corrals')
             .send({ name: 'Tigre', age: 5, dangerous: 'truesss' });
         expect(response.status).toBe(400);
-        expect(response.body).toEqual({ error: 'Error al crear animal' });
+        expect(response.body).toEqual({ error: 'Error al crear corral' });
     });
     
     it('La respuesta se produce dentro de un tiempo aceptable', async () => {
-        configureMocks('mockCreateAnimal');
+        configureMocks('mockCreateCorral');
         const startTime = Date.now();
-        await request(app).post('/animals');
+        await request(app).post('/corrals');
         const endTime = Date.now();  
         const duration = endTime - startTime;
       
