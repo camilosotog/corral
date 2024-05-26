@@ -69,4 +69,15 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Obtener animales por corral
+router.get('/animal/:corralId', async (req, res) => {
+  try {
+    const { corralId } = req.params;
+    const animals = await Animal.findAll({ where: { corralId } });
+    res.status(200).json(animals);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;
