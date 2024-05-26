@@ -10,6 +10,13 @@ const configureMocks = (nameMock) => {
 
     const mockUpdatedAnimal = { id: 1, name: 'Perro', age: 6, dangerous: true };
 
+    const mockAnimalByCorral = [
+        {id: 1, name: 'Leon', age: 5, dangerous: true, CorralId: 1},
+        {id: 2, name: 'Tigre', age: 2, dangerous: true, CorralId: 1},
+        {id: 3, name: 'Pajarito', age: 1, dangerous: false, CorralId: 2},
+        {id: 4, name: 'Caballo', age: 11, dangerous: false, CorralId: 1}
+    ];
+
     switch (nameMock) {
         case 'mockAnimals':
             Animal.findAll.mockResolvedValue(mockAnimals);
@@ -37,6 +44,9 @@ const configureMocks = (nameMock) => {
             break;
         case 'mockNotFound':
             Animal.update.mockResolvedValue([0]);
+            break;
+        case 'mockAnimalByCorral':
+            Animal.findAll.mockResolvedValue(mockAnimalByCorral);
             break;
         default:
             Animal.findAll.mockResolvedValue(mockAnimals);

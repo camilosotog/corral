@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       dangerous: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+      },
+      CorralId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       }
     });
   
