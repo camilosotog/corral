@@ -26,60 +26,59 @@ jest.mock('../../../models', () => {
  */
 
 describe('CREATE (post) /corrals', () => {
+  it('Debería crear un nuevo corral correctamente', async () => {
+      configureMocks('mockCreateCorral');
+      const response = await request(app)
+        .post('/corrals')
+        .send({});
+      expect(response.status).toBe(201);
+      expect(response.body).toEqual(expect.objectContaining({ id: 32, name: 'Corral 3', capacity: 2 }));
+  });
+
+  it('Debería retornar un error si los datos son incompletos', async () => {
+      configureMocks('mockCreateCorral');
+      const response = await request(app)
+        .post('/corrals')
+        .send({ name: 'Loro' });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual(expect.objectContaining({
+        error: expect.any(String)
+      }));
+  });
+
+  it('No debería permitir crear un corral con un ID duplicado', async () => {
+      configureMocks('mockDuplicateIdError');
+      const response = await request(app)
+        .post('/corrals')
+        .send({ id: 1, name: 'Perro', age: 5, dangerous: false });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({ error: 'Duplicate ID error' });
+  });
+
+  it('Debería manejar errores correctamente', async () => {
+      configureMocks('mockManagmentError');
+      const response = await request(app)
+        .post('/corrals')
+        .send({ name: 'Loro', age: 2, dangerous: false });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({ error: 'Error al crear corral' });
+  });
+
+  it('Debería retornar un error si el campo dangerous no es un booleano', async () => {
+      const response = await request(app)
+          .post('/corrals')
+          .send({ name: 'Tigre', age: 5, dangerous: 'truesss' });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({ error: 'Error al crear corral' });
+  });
   
-  // it('Debería crear un nuevo corral correctamente', async () => {
-  //     configureMocks('mockCreateCorral');
-  //     const response = await request(app)
-  //       .post('/corrals')
-  //       .send({});
-  //     expect(response.status).toBe(201);
-  //     expect(response.body).toEqual(expect.objectContaining({ id: 32, name: 'Corral 3', capacity: 2 }));
-  // });
-
-  // it('Debería retornar un error si los datos son incompletos', async () => {
-  //     configureMocks('mockCreateCorral');
-  //     const response = await request(app)
-  //       .post('/corrals')
-  //       .send({ name: 'Loro' });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual(expect.objectContaining({
-  //       error: expect.any(String)
-  //     }));
-  // });
-
-  // it('No debería permitir crear un corral con un ID duplicado', async () => {
-  //     configureMocks('mockDuplicateIdError');
-  //     const response = await request(app)
-  //       .post('/corrals')
-  //       .send({ id: 1, name: 'Perro', age: 5, dangerous: false });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual({ error: 'Duplicate ID error' });
-  // });
-
-  // it('Debería manejar errores correctamente', async () => {
-  //     configureMocks('mockManagmentError');
-  //     const response = await request(app)
-  //       .post('/corrals')
-  //       .send({ name: 'Loro', age: 2, dangerous: false });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual({ error: 'Error al crear corral' });
-  // });
-
-  // it('Debería retornar un error si el campo dangerous no es un booleano', async () => {
-  //     const response = await request(app)
-  //         .post('/corrals')
-  //         .send({ name: 'Tigre', age: 5, dangerous: 'truesss' });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual({ error: 'Error al crear corral' });
-  // });
-  
-  // it('Valida si la respuesta se produce dentro de un tiempo aceptable (300)', async () => {
-  //     configureMocks('mockCreateCorral');
-  //     const startTime = Date.now();
-  //     await request(app).post('/corrals');
-  //     const endTime = Date.now();  
-  //     const duration = endTime - startTime;
-  //     console.log(duration);
-  //     expect(duration).toBeLessThan(300);
-  //   });  
+  it('Valida si la respuesta se produce dentro de un tiempo aceptable (300)', async () => {
+      configureMocks('mockCreateCorral');
+      const startTime = Date.now();
+      await request(app).post('/corrals');
+      const endTime = Date.now();  
+      const duration = endTime - startTime;
+      console.log(duration);
+      expect(duration).toBeLessThan(300);
+    });  
 });

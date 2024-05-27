@@ -26,50 +26,50 @@ jest.mock('../../../models', () => {
  */
 
 describe('GET /corrals', () => {
-  // it('Debería devolver todos los corrales', async () => {
-  //   configureMocks('mockCorrals');
-  //   const response = await request(app).get('/corrals');
-  //   expect(Corral.findAll).toHaveBeenCalledTimes(1);
-  //   expect(response.status).toBe(200);
-  //   expect(response.body).toEqual(expect.arrayContaining([
-  //     expect.objectContaining({ id: 1, name: 'Corral 1', capacity: 5 }),
-  //     expect.objectContaining({ id: 2, name: 'Corral 2', capacity: 3 })
-  //   ]));
-  // });
+  it('Debería devolver todos los corrales', async () => {
+    configureMocks('mockCorrals');
+    const response = await request(app).get('/corrals');
+    expect(Corral.findAll).toHaveBeenCalledTimes(1);
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 1, name: 'Corral 1', capacity: 5 }),
+      expect.objectContaining({ id: 2, name: 'Corral 2', capacity: 3 })
+    ]));
+  });
 
-  // it('Debería manejar errores correctamente', async () => {
-  //   configureMocks('mockError');
-  //   const response = await request(app).get('/corrals');
-  //   expect(response.body).toEqual({ error: 'Error al obtener Corrales' });
-  // });
+  it('Debería manejar errores correctamente', async () => {
+    configureMocks('mockError');
+    const response = await request(app).get('/corrals');
+    expect(response.body).toEqual({ error: 'Error al obtener Corrales' });
+  });
 
-  // it('La respuesta devuelve el formato JSON esperado, valida que sea tipo de dato definido en el modelo', async () => {
-  //   configureMocks('mockCorrals');
-  //   const response = await request(app).get('/corrals');
-  //   expect(Array.isArray(response.body)).toBe(true);
-  //   response.body.forEach((corral) => {
-  //     expect(corral).toHaveProperty('id');
-  //     expect(typeof corral.id).toBe('number');
-  //     expect(corral).toHaveProperty('name');
-  //     expect(typeof corral.name).toBe('string');
-  //     expect(corral).toHaveProperty('capacity');
-  //     expect(typeof corral.capacity).toBe('number');
-  //   });
-  // });
+  it('La respuesta devuelve el formato JSON esperado, valida que sea tipo de dato definido en el modelo', async () => {
+    configureMocks('mockCorrals');
+    const response = await request(app).get('/corrals');
+    expect(Array.isArray(response.body)).toBe(true);
+    response.body.forEach((corral) => {
+      expect(corral).toHaveProperty('id');
+      expect(typeof corral.id).toBe('number');
+      expect(corral).toHaveProperty('name');
+      expect(typeof corral.name).toBe('string');
+      expect(corral).toHaveProperty('capacity');
+      expect(typeof corral.capacity).toBe('number');
+    });
+  });
 
-  // it('Valida si l¿ respuesta retorna el código de estado HTTP correcto', async () => {
-  //   configureMocks('mockCorrals');
-  //     const response = await request(app).get('/corrals');
-  //     expect(response.status).toBe(200);
-  // });
+  it('Valida si l¿ respuesta retorna el código de estado HTTP correcto', async () => {
+    configureMocks('mockCorrals');
+      const response = await request(app).get('/corrals');
+      expect(response.status).toBe(200);
+  });
   
-  // it('Valida si la respuesta se produce dentro de un tiempo aceptable (300ms)', async () => {
-  //   configureMocks('mockCorrals');
-  //   const startTime = Date.now();
-  //   await request(app).get('/corrals');
-  //   const endTime = Date.now();  
-  //   const duration = endTime - startTime;
-  //   console.log(duration);
-  //   expect(duration).toBeLessThan(300);
-  // });  
+  it('Valida si la respuesta se produce dentro de un tiempo aceptable (300ms)', async () => {
+    configureMocks('mockCorrals');
+    const startTime = Date.now();
+    await request(app).get('/corrals');
+    const endTime = Date.now();  
+    const duration = endTime - startTime;
+    console.log(duration);
+    expect(duration).toBeLessThan(300);
+  });  
 });

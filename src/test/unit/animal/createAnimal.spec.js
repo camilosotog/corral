@@ -26,59 +26,59 @@ jest.mock('../../../models', () => {
  */
 
 describe('CREATE (post) /animals', () => {
-  // it('Debería crear un nuevo animal correctamente', async () => {
-  //     configureMocks('mockCreateAnimal');
-  //     const response = await request(app)
-  //       .post('/animals')
-  //       .send({});
-  //     expect(response.status).toBe(201);
-  //     expect(response.body).toEqual(expect.objectContaining({ id: 32, name: 'Loro', age: 2, dangerous: false }));
-  // });
+  it('Debería crear un nuevo animal correctamente', async () => {
+      configureMocks('mockCreateAnimal');
+      const response = await request(app)
+        .post('/animals')
+        .send({});
+      expect(response.status).toBe(201);
+      expect(response.body).toEqual(expect.objectContaining({ id: 32, name: 'Loro', age: 2, dangerous: false }));
+  });
 
-  // it('Debería retornar un error si los datos son incompletos', async () => {
-  //     configureMocks('mockCreateAnimal');
-  //     const response = await request(app)
-  //       .post('/animals')
-  //       .send({ name: 'Loro' });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual(expect.objectContaining({
-  //       error: expect.any(String)
-  //     }));
-  // });
+  it('Debería retornar un error si los datos son incompletos', async () => {
+      configureMocks('mockCreateAnimal');
+      const response = await request(app)
+        .post('/animals')
+        .send({ name: 'Loro' });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual(expect.objectContaining({
+        error: expect.any(String)
+      }));
+  });
 
-  // it('No debería permitir crear un animal con un ID duplicado', async () => {
-  //     configureMocks('mockDuplicateIdError');
-  //     const response = await request(app)
-  //       .post('/animals')
-  //       .send({ id: 1, name: 'Perro', age: 5, dangerous: false });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual({ error: 'Duplicate ID error' });
-  // });
+  it('No debería permitir crear un animal con un ID duplicado', async () => {
+      configureMocks('mockDuplicateIdError');
+      const response = await request(app)
+        .post('/animals')
+        .send({ id: 1, name: 'Perro', age: 5, dangerous: false });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({ error: 'Duplicate ID error' });
+  });
 
-  // it('Debería manejar errores correctamente', async () => {
-  //     configureMocks('mockManagmentError');
-  //     const response = await request(app)
-  //       .post('/animals')
-  //       .send({ name: 'Loro', age: 2, dangerous: false });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual({ error: 'Error al crear animal' });
-  // });
+  it('Debería manejar errores correctamente', async () => {
+      configureMocks('mockManagmentError');
+      const response = await request(app)
+        .post('/animals')
+        .send({ name: 'Loro', age: 2, dangerous: false });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({ error: 'Error al crear animal' });
+  });
 
-  // it('Debería retornar un error si el campo dangerous no es un booleano', async () => {
-  //     const response = await request(app)
-  //         .post('/animals')
-  //         .send({ name: 'Tigre', age: 5, dangerous: 'truesss' });
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual({ error: 'Error al crear animal' });
-  // });
+  it('Debería retornar un error si el campo dangerous no es un booleano', async () => {
+      const response = await request(app)
+          .post('/animals')
+          .send({ name: 'Tigre', age: 5, dangerous: 'truesss' });
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({ error: 'Error al crear animal' });
+  });
 
-  // it('La respuesta se produce dentro de un tiempo aceptable (300)', async () => {
-  //     configureMocks('mockCreateAnimal');
-  //     const startTime = Date.now();
-  //     await request(app).post('/animals');
-  //     const endTime = Date.now();  
-  //     const duration = endTime - startTime;
-  //     console.log(duration);
-  //     expect(duration).toBeLessThan(300);
-  //   });  
+  it('La respuesta se produce dentro de un tiempo aceptable (300)', async () => {
+      configureMocks('mockCreateAnimal');
+      const startTime = Date.now();
+      await request(app).post('/animals');
+      const endTime = Date.now();  
+      const duration = endTime - startTime;
+      console.log(duration);
+      expect(duration).toBeLessThan(300);
+    });  
 });

@@ -26,15 +26,15 @@ jest.mock('../../../models', () => {
  */
 
 describe('GET /animalsByCorral', () => {
-  // it('Debería retornar todos los animales en un corral dado el id de un corral', async () => {
-  //   configureMocks('mockAnimalByCorral');
-  //   const response = await request(app).get('/animals/animal/1');
-  //   expect(Animal.findAll).toHaveBeenCalledTimes(1);
-  //   expect(response.status).toBe(200);
-  //   expect(response.body).toEqual(expect.arrayContaining([
-  //     expect.objectContaining({id: 1, name: 'Leon', age: 5, dangerous: true, CorralId: 1}),
-  //     expect.objectContaining({id: 2, name: 'Tigre', age: 2, dangerous: true, CorralId: 1}),
-  //     expect.objectContaining({id: 4, name: 'Caballo', age: 1, dangerous: false, CorralId: 1})
-  //   ]));
-  // });
+  it('Debería retornar todos los animales en un corral dado el id de un corral', async () => {
+    configureMocks('mockAnimalByCorral');
+    const response = await request(app).get('/animals/animal/1');
+    expect(Animal.findAll).toHaveBeenCalledTimes(1);
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(expect.arrayContaining([
+      expect.objectContaining({id: 1, name: 'Leon', age: 5, dangerous: true, CorralId: 1}),
+      expect.objectContaining({id: 2, name: 'Tigre', age: 2, dangerous: true, CorralId: 1}),
+      expect.objectContaining({id: 4, name: 'Caballo', age: 1, dangerous: false, CorralId: 1})
+    ]));
+  });
 });

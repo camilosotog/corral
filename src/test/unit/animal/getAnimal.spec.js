@@ -26,52 +26,52 @@ jest.mock('../../../models', () => {
  */
 
 describe('GET /animals', () => {
-  // it('Debería devolver todos los animales', async () => {
-  //   configureMocks('mockAnimals');
-  //   const response = await request(app).get('/animals');
-  //   expect(Animal.findAll).toHaveBeenCalledTimes(1);
-  //   expect(response.status).toBe(200);
-  //   expect(response.body).toEqual(expect.arrayContaining([
-  //     expect.objectContaining({ id: 1, name: 'Perro', age: 5, dangerous: false }),
-  //     expect.objectContaining({ id: 2, name: 'Gato', age: 3, dangerous: false })
-  //   ]));
-  // });
+  it('Debería devolver todos los animales', async () => {
+    configureMocks('mockAnimals');
+    const response = await request(app).get('/animals');
+    expect(Animal.findAll).toHaveBeenCalledTimes(1);
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 1, name: 'Perro', age: 5, dangerous: false }),
+      expect.objectContaining({ id: 2, name: 'Gato', age: 3, dangerous: false })
+    ]));
+  });
 
-  // it('Debería manejar errores correctamente', async () => {
-  //   configureMocks('mockError');
-  //   const response = await request(app).get('/animals');
-  //   expect(response.body).toEqual({ error: 'Error al obtener animales' });
-  // });
+  it('Debería manejar errores correctamente', async () => {
+    configureMocks('mockError');
+    const response = await request(app).get('/animals');
+    expect(response.body).toEqual({ error: 'Error al obtener animales' });
+  });
 
-  // it('La respuesta devuelve el formato JSON esperado, valida que sea tipo de dato definido en el modelo', async () => {
-  //   configureMocks('mockAnimals');
-  //   const response = await request(app).get('/animals');
-  //   expect(Array.isArray(response.body)).toBe(true);
-  //   response.body.forEach((animal) => {
-  //     expect(animal).toHaveProperty('id');
-  //     expect(typeof animal.id).toBe('number');
-  //     expect(animal).toHaveProperty('name');
-  //     expect(typeof animal.name).toBe('string');
-  //     expect(animal).toHaveProperty('age');
-  //     expect(typeof animal.age).toBe('number');
-  //     expect(animal).toHaveProperty('dangerous');
-  //     expect(typeof animal.dangerous).toBe('boolean');
-  //   });
-  // });
+  it('La respuesta devuelve el formato JSON esperado, valida que sea tipo de dato definido en el modelo', async () => {
+    configureMocks('mockAnimals');
+    const response = await request(app).get('/animals');
+    expect(Array.isArray(response.body)).toBe(true);
+    response.body.forEach((animal) => {
+      expect(animal).toHaveProperty('id');
+      expect(typeof animal.id).toBe('number');
+      expect(animal).toHaveProperty('name');
+      expect(typeof animal.name).toBe('string');
+      expect(animal).toHaveProperty('age');
+      expect(typeof animal.age).toBe('number');
+      expect(animal).toHaveProperty('dangerous');
+      expect(typeof animal.dangerous).toBe('boolean');
+    });
+  });
 
-  // it('Debería retornar como respuesta el código de estado HTTP correcto', async () => {
-  //   configureMocks('mockAnimals');
-  //     const response = await request(app).get('/animals');
-  //     expect(response.status).toBe(200);
-  // });
+  it('Debería retornar como respuesta el código de estado HTTP correcto', async () => {
+    configureMocks('mockAnimals');
+      const response = await request(app).get('/animals');
+      expect(response.status).toBe(200);
+  });
   
-  // it('Valida si la rrespuesta se produce dentro de un tiempo aceptable (300ms)', async () => {
-  //   configureMocks('mockAnimals');
-  //   const startTime = Date.now();
-  //   await request(app).get('/animals');
-  //   const endTime = Date.now();  
-  //   const duration = endTime - startTime;
-  //   console.log(duration);
-  //   expect(duration).toBeLessThan(300);
-  // });  
+  it('Valida si la rrespuesta se produce dentro de un tiempo aceptable (300ms)', async () => {
+    configureMocks('mockAnimals');
+    const startTime = Date.now();
+    await request(app).get('/animals');
+    const endTime = Date.now();  
+    const duration = endTime - startTime;
+    console.log(duration);
+    expect(duration).toBeLessThan(300);
+  });  
 });
