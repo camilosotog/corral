@@ -70,6 +70,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Reasignar corral cuando hay animales poco peligrosos con peligrosos
 router.post('/corral/reasign', async (req, res) => {
   try {
     await reasignCorral();
@@ -80,6 +81,7 @@ router.post('/corral/reasign', async (req, res) => {
   }
 });
 
+// Calcular promedio de edad
 router.get('/:id/average-age', async (req, res) => {
   try {
     const averageAge = await getAverageAgeInCorral(req.params.id);

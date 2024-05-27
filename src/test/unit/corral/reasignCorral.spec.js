@@ -12,7 +12,7 @@ jest.mock('../../../models', () => {
   };
 });
 
-describe('ReassignCorral /corrals', () => {
+describe('ReassignCorral (POST) /corrals', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

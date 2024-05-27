@@ -35,7 +35,7 @@ describe('CREATE (post) /corrals', () => {
         expect(response.body).toEqual(expect.objectContaining({ id: 32, name: 'Corral 3', capacity: 2 }));
     });
 
-    it('Debería devolver un error si los datos son incompletos', async () => {
+    it('Debería retornar un error si los datos son incompletos', async () => {
         configureMocks('mockCreateCorral');
         const response = await request(app)
           .post('/corrals')
@@ -64,7 +64,7 @@ describe('CREATE (post) /corrals', () => {
         expect(response.body).toEqual({ error: 'Error al crear corral' });
     });
 
-    it('Debería devolver un error si el campo dangerous no es un booleano', async () => {
+    it('Debería retornar un error si el campo dangerous no es un booleano', async () => {
         const response = await request(app)
             .post('/corrals')
             .send({ name: 'Tigre', age: 5, dangerous: 'truesss' });
@@ -72,14 +72,12 @@ describe('CREATE (post) /corrals', () => {
         expect(response.body).toEqual({ error: 'Error al crear corral' });
     });
     
-    it('La respuesta se produce dentro de un tiempo aceptable', async () => {
+    it('Valida si la respuesta se produce dentro de un tiempo aceptable (300)', async () => {
         configureMocks('mockCreateCorral');
         const startTime = Date.now();
         await request(app).post('/corrals');
         const endTime = Date.now();  
         const duration = endTime - startTime;
-      
-        // Verifica que la duración de la solicitud sea aceptable en este caso 300ms
         console.log(duration);
         expect(duration).toBeLessThan(300);
       });  

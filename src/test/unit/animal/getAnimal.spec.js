@@ -59,20 +59,18 @@ describe('GET /animals', () => {
     });
   });
 
-  it('La respuesta devuelve el código de estado HTTP correcto', async () => {
+  it('Debería retornar como respuesta el código de estado HTTP correcto', async () => {
     configureMocks('mockAnimals');
       const response = await request(app).get('/animals');
       expect(response.status).toBe(200);
   });
   
-  it('La respuesta se produce dentro de un tiempo aceptable', async () => {
+  it('Valida si la rrespuesta se produce dentro de un tiempo aceptable (300ms)', async () => {
     configureMocks('mockAnimals');
     const startTime = Date.now();
     await request(app).get('/animals');
     const endTime = Date.now();  
     const duration = endTime - startTime;
-  
-    // Verifica que la duración de la solicitud sea aceptable en este caso 300ms
     console.log(duration);
     expect(duration).toBeLessThan(300);
   });  

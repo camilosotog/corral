@@ -19,7 +19,7 @@ jest.mock('../../../models', () => {
 });
 
 describe('UPDATE (post) /corrals', () => {
-  it('Debería devolver un error 404 si el corral no existe', async () => {
+  it('Debería retornar un error 404 si el corral no existe', async () => {
     configureMocks('mockNotFound');
     const response = await request(app)
       .put('/corrals/999')
@@ -28,7 +28,7 @@ describe('UPDATE (post) /corrals', () => {
     expect(response.body).toEqual({ error: 'Corral not found' });
   });
 
-  it('Debería devolver un error 400 si se proporcionan datos de entrada inválidos', async () => {
+  it('Debería retornar un error 400 si se proporcionan datos de entrada inválidos', async () => {
     configureMocks('mockUpdatedCorral');
     const response = await request(app)
       .put('/corrals/1')

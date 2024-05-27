@@ -26,7 +26,7 @@ jest.mock('../../../models', () => {
  */
 
 describe('GET /animalsByCorral', () => {
-  it('Debería devolver todos los animales en un corral dado el id de un corral', async () => {
+  it('Debería retornar todos los animales en un corral dado el id de un corral', async () => {
     configureMocks('mockAnimalByCorral');
     const response = await request(app).get('/animals/animal/1');
     expect(Animal.findAll).toHaveBeenCalledTimes(1);
