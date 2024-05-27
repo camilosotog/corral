@@ -1,7 +1,7 @@
 const express = require('express');
 const { Corral } = require('../models');
 const router = express.Router();
-const { reasignCorral } = require('../controllers/corralController');
+const { reasignCorral, getAverageAgeInCorral } = require('../controllers/corralController');
 
 // Crear un nuevo corral
 router.post('/', async (req, res) => {
@@ -76,6 +76,19 @@ router.post('/corral/reasign', async (req, res) => {
     res.status(200).json({ message: 'Reorganización de animales completada' });
   } catch (error) {
     console.error('Error al reorganizar animales:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+router.get('/:id/average-age', async (req, res) => {
+  try {
+    const averageAge = await getAverageAgeInCorral(req.params.id);
+    if (typeof averageAge === 'number') {
+      res.status(200).json({ averageAge });
+    } else {
+      res.status(404).json({ error: averageAge });
+    }
+  } catch (error) {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
