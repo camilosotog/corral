@@ -36,4 +36,3 @@ describe('UPDATE (post) /corrals', () => {
     expect(response.status).toBe(400);
   });
 });
-// 
