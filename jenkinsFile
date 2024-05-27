@@ -1,0 +1,33 @@
+pipeline {
+  agent any
+
+  tools {
+    nodejs "node"
+  }
+
+  parameters {
+    string(name: 'container_name', defaultValue: 'pagina_web', description: 'nombre del contenedor de docker')
+    string(name: 'img_name', defaultValue: 'pagina_img', description: 'nombre de imagen docker')
+    string(name: 'tag_image', defaultValue: 'lts', description: 'tag de la imagen de la pagina')
+    string(name: 'container_port', defaultValue: '80', description: 'puerto que usa el contenedor')
+  }
+
+  stages {
+    stage('install') {
+      steps {
+        git branch: 'prueba-hook', url: 'https://github.com/camilosotog/corral.git'
+        dir('back') {
+          bat 'npm install'
+        }
+      }
+    }
+
+    stage('test') {
+      steps {
+        dir('back') {
+          bat 'npm test'
+        }
+      }
+    }
+  }
+}
