@@ -12,7 +12,7 @@ jest.mock('../../../models', () => {
   };
 });
 
-describe('getAverageAgeInCorral', () => {
+describe('getAverageAgeInCorral (GET) / corrals', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

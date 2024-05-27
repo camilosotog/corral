@@ -19,7 +19,7 @@ jest.mock('../../../models', () => {
 });
 
 describe('UPDATE (post) /animals', () => {
-    it('Debería devolver un error 404 si el animal no existe', async () => {
+    it('Debería retornar un error 404 si el animal no existe', async () => {
         configureMocks('mockNotFound');
         const response = await request(app)
           .put('/animals/999')
@@ -28,7 +28,7 @@ describe('UPDATE (post) /animals', () => {
         expect(response.body).toEqual({ error: 'Animal not found' });
     });
 
-    it('Debería devolver un error 400 si se proporcionan datos de entrada inválidos', async () => {
+    it('Debería retornar un error 400 si se proporcionan datos de entrada inválidos', async () => {
         configureMocks('mockUpdatedAnimal');
         const response = await request(app)
           .put('/animals/1')

@@ -57,20 +57,18 @@ describe('GET /corrals', () => {
     });
   });
 
-  it('La respuesta devuelve el código de estado HTTP correcto', async () => {
+  it('Valida si l¿ respuesta retorna el código de estado HTTP correcto', async () => {
     configureMocks('mockCorrals');
       const response = await request(app).get('/corrals');
       expect(response.status).toBe(200);
   });
   
-  it('La respuesta se produce dentro de un tiempo aceptable', async () => {
+  it('Valida si la respuesta se produce dentro de un tiempo aceptable (300ms)', async () => {
     configureMocks('mockCorrals');
     const startTime = Date.now();
     await request(app).get('/corrals');
     const endTime = Date.now();  
     const duration = endTime - startTime;
-  
-    // Verifica que la duración de la solicitud sea aceptable en este caso 300ms
     console.log(duration);
     expect(duration).toBeLessThan(300);
   });  
