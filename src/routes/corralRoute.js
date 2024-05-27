@@ -1,6 +1,7 @@
 const express = require('express');
 const { Corral } = require('../models');
 const router = express.Router();
+const { reasignCorral } = require('../controllers/corralController');
 
 // Crear un nuevo corral
 router.post('/', async (req, res) => {
@@ -66,6 +67,16 @@ router.delete('/:id', async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+router.post('/corral/reasign', async (req, res) => {
+  try {
+    await reasignCorral();
+    res.status(200).json({ message: 'Reorganización de animales completada' });
+  } catch (error) {
+    console.error('Error al reorganizar animales:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
 
