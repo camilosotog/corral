@@ -42,3 +42,23 @@ exports.reasignCorral = async () => {
     return 'Error interno del servidor';
   }
 };
+
+exports.getAverageAgeInCorral = async (corralId) => {
+  try {
+    const corral = await Corral.findByPk(corralId);
+    if (!corral) {
+      return 'Corral no encontrado';
+    }
+    const animals = await Animal.findAll({ where: { CorralId: corralId } });
+    if (animals.length === 0) {
+      return 'No hay animales en este corral';
+    }
+    const totalAge = animals.reduce((sum, animal) => sum + animal.age, 0);
+    const averageAge = totalAge / animals.length;
+    return averageAge;
+  } catch (error) {
+    console.error('Error al calcular el promedio de edad:', error);
+    return 'Error interno del servidor';
+  }
+};
+
