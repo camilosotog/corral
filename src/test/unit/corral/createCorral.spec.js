@@ -26,6 +26,7 @@ jest.mock('../../../models', () => {
  */
 
 describe('CREATE (post) /corrals', () => {
+  
   // it('Debería crear un nuevo corral correctamente', async () => {
   //     configureMocks('mockCreateCorral');
   //     const response = await request(app)
