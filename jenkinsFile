@@ -5,25 +5,23 @@ pipeline {
     nodejs "node"
   }
 
-  parameters {
-    string(name: 'container_name', defaultValue: 'pagina_web', description: 'nombre del contenedor de docker')
-    string(name: 'img_name', defaultValue: 'pagina_img', description: 'nombre de imagen docker')
-    string(name: 'tag_image', defaultValue: 'lts', description: 'tag de la imagen de la pagina')
-    string(name: 'container_port', defaultValue: '80', description: 'puerto que usa el contenedor')
-  }
-
   stages {
-    stage('install') {
+    stage('Install') {
       steps {
-        git branch: 'prueba-hook', url: 'https://github.com/camilosotog/corral.git'
+        // Clonar el repositorio desde la rama main
+        git branch: 'main', url: 'https://github.com/camilosotog/corral.git'
+
+        // Cambiar al directorio 'back' y ejecutar npm install
         dir('back') {
+          // Si estás en Windows, usa 'bat'. Si estás en Unix, usa 'sh'
           bat 'npm install'
         }
       }
     }
 
-    stage('test') {
+    stage('Test') {
       steps {
+        // Cambiar al directorio 'back' y ejecutar npm test
         dir('back') {
           bat 'npm test'
         }
