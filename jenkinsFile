@@ -8,12 +8,9 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        // Clonar el repositorio desde la rama main
         git branch: 'main', url: 'https://github.com/camilosotog/corral.git'
 
-        // Cambiar al directorio 'back' y ejecutar npm install
         dir('back') {
-          // Si estás en Windows, usa 'bat'. Si estás en Unix, usa 'sh'
           bat 'npm install'
         }
       }
@@ -21,7 +18,6 @@ pipeline {
 
     stage('Test') {
       steps {
-        // Cambiar al directorio 'back' y ejecutar npm test
         dir('back') {
           bat 'npm test'
         }
