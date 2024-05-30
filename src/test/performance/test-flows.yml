@@ -1,0 +1,58 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 600  # 15 minutos
+      arrivalRate: 20  # 20 usuarios por segundo
+scenarios:
+  - name: '1. Crear un Corral y Agregar Animales'
+    flow:
+      - post:
+          url: "/corrals"
+          json:
+            name: "Nuevo Corral"
+            capacity: 100
+      - post:
+          url: "/animals"
+          json:
+            name: "Animal 1"
+            age: 2
+            dangerous: false
+            CorralId: 83
+      - post:
+          url: "/animals"
+          json:
+            name: "Animal 2"
+            age: 3
+            dangerous: true
+            CorralId: 83
+      - post:
+          url: "/animals"
+          json:
+            name: "Animal 3"
+            age: 1
+            dangerous: false
+            CorralId: 83
+
+  - name: '2. Obtener Información de un Corral y sus Animales'
+    flow:
+      - get:
+          url: "/corrals/83"
+      - get:
+          url: "/animals"
+          qs:
+            CorralId: 83
+
+  - name: '3. Obtener un Corral y Calcular el Promedio de Edad de los Animales de ese Corral'
+    flow:
+      - get:
+          url: "/corrals/83"
+      - get:
+          url: "/animals"
+          qs:
+            CorralId: 83
+      - log:
+          message: |
+            const animals = response.jsonBody;
+            const ages = animals.map(animal => animal.age);
+            const averageAge = ages.reduce((acc, age) => acc + age, 0) / ages.length;
+            console.log(`Average Age: ${averageAge}`);

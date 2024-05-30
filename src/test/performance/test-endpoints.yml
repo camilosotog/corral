@@ -1,0 +1,66 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 300  # 5 minutos
+      arrivalRate: 200  # 200 usuarios por segundo
+scenarios:
+  - name: 'Get Animals'
+    flow:
+      - get:
+          url: "/animals"
+
+  - name: 'Get Corrals'
+    flow:
+      - get:
+          url: "/corrals"
+
+  - name: 'Get Animal by ID'
+    flow:
+      - get:
+          url: "/animals/80"
+
+  - name: 'Get Corral by ID'
+    flow:
+      - get:
+          url: "/corrals/92"
+
+  - name: 'Create Corral'
+    flow:
+      - post:
+          url: "/corrals"
+          json:
+            name: "Rendimiento Corral"
+            capacity: 1200
+
+  - name: 'Create Animal'
+    flow:
+      - post:
+          url: "/animals"
+          json:
+            name: "Rendimiento Animal"
+            age: 12
+            dangerous: true
+            CorralId: 92
+
+  - name: 'Update Corral'
+    flow:
+      - post:
+          url: "/corrals/92"
+          json:
+            name: "update Corral"
+            capacity: 1200
+      
+  - name: 'Update Animal'
+    flow:
+      - post:
+          url: "/animals/80"
+          json:
+            name: "update Animal"
+
+  - name: 'Reasignar Corral'
+    flow:
+      - post:
+          url: "/corrals/corral/reasign"
+          json:
+            name: "update Corral"
+            capacity: 1200
