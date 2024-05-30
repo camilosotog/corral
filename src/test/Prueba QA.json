@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "56d73b5f-da84-4def-8a41-b3e7764ab8f3",
+		"name": "Prueba QA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "28604488-56d73b5f-da84-4def-8a41-b3e7764ab8f3"
+	},
+	"item": [
+		{
+			"name": "crearAnimal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ea0fe54-f76f-472e-9ba5-ef7a32a6ef86",
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(201);",
+							"  });",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "fa5575dd-40a9-456a-8958-1c760962ca34",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{json_body}}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3333/animals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"animals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAnimal",
+			"id": "d7039077-0e5f-44da-a4f2-155fd62bafdb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/animals/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateAnimal",
+			"id": "b6ef5657-f0bf-44cb-9fda-67cd7a29b7f6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CorralId\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/animals/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAnimal",
+			"id": "2ceacd30-f713-4f1a-8310-f07d323ff0e5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/animals/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCorral",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b3bec04-d736-421e-b9c4-d1df1d5bde7c",
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(201);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "76f45a73-30ad-47ef-b709-249f92b7d081",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "7ca89eb0-ec15-4325-b0aa-908108697729",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{json_body}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/corrals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"corrals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCorral",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bf3fd45-2548-4aa8-97e8-a19049e02f20",
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "48b691f1-627c-4bcb-9d8b-1a0fea9e56a3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/corrals/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"corrals",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCorral",
+			"id": "456ac221-1c27-412d-a033-da9c960f1b58",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"capacity\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/corrals/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"corrals",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "average-age",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b0817ee-2d69-4b31-a7dd-821491ba593a",
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b2dca598-e034-42c4-a407-13fd870dd2aa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/corrals/{{corralId}}/average-age",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"corrals",
+						"{{corralId}}",
+						"average-age"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reasign",
+			"id": "f6fcedd8-6cdd-49ce-a461-0317f6a32215",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/corrals/corral/reasign",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"corrals",
+						"corral",
+						"reasign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "animalByCorral",
+			"id": "71ac69e3-9f54-41b3-bff5-c88795a68bbf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/animals/animal/{{corralId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animals",
+						"animal",
+						"{{corralId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "animalrestrictions",
+			"id": "ee2b6005-6b82-4df2-af5e-85e0a79f7bad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"animalId\":1,\r\n    \"restrictionId\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/animalrestrictions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"animalrestrictions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCorral",
+			"id": "278373c0-d6d9-4bd0-be4e-7f8be38eb3dc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/corrals/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"corrals",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
