@@ -42,12 +42,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3333/animals",
+					"raw": "http://localhost:3000/animals",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3333",
+					"port": "3000",
 					"path": [
 						"animals"
 					]
